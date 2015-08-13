@@ -1,0 +1,18 @@
+[diff]
+	tool = diffmerge
+[difftool "diffmerge"]
+	cmd = /usr/bin/diffmerge \"$LOCAL\" \"$REMOTE\"
+[merge]
+	tool = diffmerge
+[mergetool "diffmerge"]
+	cmd = "/usr/bin/diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$(if test -f \"$BASE\"; then echo \"$BASE\"; else echo \"$LOCAL\"; fi)\" \"$REMOTE\""
+	trustExitCode = true
+[user]
+	name = Jonathan Channon
+	email = jonathan.channon@gmail.com
+[core]
+	editor = subl -n -w
+[help]
+	autocorrect = -1
+[pull]
+	rebase = true
