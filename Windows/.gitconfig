@@ -1,0 +1,21 @@
+[diff]
+    tool = diffmerge
+[merge]
+    tool = diffmerge
+[difftool "diffmerge"]
+    cmd = 'C:/Program Files/SourceGear/Common/DiffMerge/sgdm.exe' "$LOCAL" "$REMOTE"
+[mergetool "diffmerge"]
+    cmd = 'C:/Program Files/SourceGear/Common/DiffMerge/sgdm.exe' -merge -result="$PWD/$MERGED" "$PWD/$LOCAL" "$PWD/$BASE" "$PWD/$REMOTE" 
+    trustExitCode = true
+    keepBackup = false
+[user]
+	name = Jonathan Channon
+	email = jonathan.channon@gmail.com
+[core]
+	editor = subl -n -w
+[help]
+	autocorrect = -1
+[pull]
+	rebase = true
+[push]
+	default = simple
