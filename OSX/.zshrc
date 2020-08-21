@@ -26,7 +26,7 @@ ZSH_THEME="ducknorris"
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
- DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to disable command auto-correction.
 # DISABLE_CORRECTION="true"
@@ -70,23 +70,24 @@ alias gcma='git commit -am'
 alias gcl='git clean -fd'
 alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
 alias gacm='git add -A && git commit -am'
-
+alias projects='cd ~/Projects'
 
 bindkey -e;
 bindkey '\e\e[C' forward-word;
 bindkey '\e\e[D' backward-word;
 
-#function precmd() {
-#  if command git rev-parse --git-dir > /dev/null 2>&1; then
-#    window_label=$(git rev-parse --show-toplevel)
-#    tab_label=$(echo $window_label | awk -F\/ '{print "[git] " $NF}')
-#  else
-#    window_label=${PWD/${HOME}/\~}
-#    tab_label=$window_label
-#  fi
-#  echo -ne "\e]2;${window_label}\a"
-#  echo -ne "\e]1;${tab_label: -24}\a"
-#}
+# Set iTerm2 window title
+function precmd() {
+  if command git rev-parse --git-dir > /dev/null 2>&1; then
+    window_label=$(git rev-parse --show-toplevel)
+    tab_label=$(echo $window_label | awk -F\/ '{print "[git] " $NF}')
+  else
+    window_label=${PWD/${HOME}/\~}
+    tab_label=$window_label
+  fi
+  echo -ne "\e]2;${window_label}\a"
+  echo -ne "\e]1;${tab_label: -24}\a"
+}
 
 # squash commits
 function squash {
