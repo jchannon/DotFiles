@@ -1,6 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
-export PATH="/usr/local/git/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/go/bin:/Users/jonathan/.svm/shims:/Applications/VMware\ Fusion.app/Contents/Library;"
+export PATH="/usr/local/git/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/go/bin"
 # export TERM="xterm-256color"
 
 # Set name of the theme to load.
@@ -66,35 +66,9 @@ plugins=(git web-search docker)
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
 alias gcma='git commit -am'
 alias gcl='git clean -fd'
-alias work='cd /Users/jonathan/Projects/vq'
-alias vqconsole='mono /Users/jonathan/Projects/vq/VQCore/VQConsole/bin/Debug/VQConsole.exe'
-alias vqweb='mono /Users/jonathan/Projects/vq/VQCore/VQPortal.Hosting.Self/bin/Debug/VQPortal.Hosting.Self.exe'
 alias reload=". ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
-alias xunit='mono /usr/bin/xunit.runner.console.2.0.0/xunit.console.exe'
-#alias xunit='mono ~/Projects/Nancy/tools/xunit/xunit.console.clr4.x86.exe'
-alias omnisharp='cd /Users/jonathan/Library/Application\ Support/Sublime\ Text\ 3/Packages/OmniSharp'
 alias gacm='git add -A && git commit -am'
 
 
@@ -102,34 +76,34 @@ bindkey -e;
 bindkey '\e\e[C' forward-word;
 bindkey '\e\e[D' backward-word;
 
-function precmd() {
-  if command git rev-parse --git-dir > /dev/null 2>&1; then
-    window_label=$(git rev-parse --show-toplevel)
-    tab_label=$(echo $window_label | awk -F\/ '{print "[git] " $NF}')
-  else
-    window_label=${PWD/${HOME}/\~}
-    tab_label=$window_label
-  fi
-  echo -ne "\e]2;${window_label}\a"
-  echo -ne "\e]1;${tab_label: -24}\a"
+#function precmd() {
+#  if command git rev-parse --git-dir > /dev/null 2>&1; then
+#    window_label=$(git rev-parse --show-toplevel)
+#    tab_label=$(echo $window_label | awk -F\/ '{print "[git] " $NF}')
+#  else
+#    window_label=${PWD/${HOME}/\~}
+#    tab_label=$window_label
+#  fi
+#  echo -ne "\e]2;${window_label}\a"
+#  echo -ne "\e]1;${tab_label: -24}\a"
+#}
+
+# squash commits
+function squash {
+git reset --soft HEAD~$1 && git commit -am"$2"
 }
 
+function squashit {
+git reset --soft head~2 && git commit -a --reuse-message head@{2}
+}
 
-source dnvm.sh # dot net shizzle
-
-# scriptcs version manager
-. $HOME/.svm_profile
 
 # stop shared terminal history. USE setopt to reenable
 unsetopt inc_append_history
 unsetopt share_history
 
-# docker
-export DOCKER_HOST=tcp://docker.local:2376
-# export DOCKER_CERT_PATH=/Users/jonathan/.boot2docker/certs/boot2docker-vm
-# export DOCKER_TLS_VERIFY=1
-unset DOCKER_TLS_VERIFY
-unset DOCKER_CERT_PATH
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/jonathan/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jonathan/google-cloud-sdk/path.zsh.inc'; fi
 
-PERL_MB_OPT="--install_base \"/Users/jonathan/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/Users/jonathan/perl5"; export PERL_MM_OPT;
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/jonathan/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jonathan/google-cloud-sdk/completion.zsh.inc'; fi
