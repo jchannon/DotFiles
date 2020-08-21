@@ -1,17 +1,25 @@
+# Diff with JetBrains Rider
 [diff]
-	tool = diffmerge
-[difftool "diffmerge"]
-	cmd = /usr/bin/diffmerge \"$LOCAL\" \"$REMOTE\"
+    tool = rider
+[difftool]
+    prompt = false
+[difftool "rider"]
+    cmd = rider diff "$LOCAL" "$REMOTE"
+
+# Merge with JetBrains Rider
 [merge]
-	tool = diffmerge
-[mergetool "diffmerge"]
-	cmd = "/usr/bin/diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$(if test -f \"$BASE\"; then echo \"$BASE\"; else echo \"$LOCAL\"; fi)\" \"$REMOTE\""
-	trustExitCode = true
+    tool = rider
+[mergetool]
+    prompt = false
+[mergetool "rider"]
+    cmd = rider merge $LOCAL $REMOTE $BASE $MERGED
+    trustExitCode = true
+
 [user]
 	name = Jonathan Channon
 	email = jonathan.channon@gmail.com
 [core]
-	editor = subl -n -w
+	editor = code --wait
 [help]
 	autocorrect = -1
 [pull]
